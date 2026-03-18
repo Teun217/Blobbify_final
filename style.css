@@ -55,7 +55,7 @@ html {
     /* --random:10; */
 
     counter-reset: seed;
-    counter-incremenant: seed var(--random);
+    counter-increment: seed var(--random);
 }
 
 
