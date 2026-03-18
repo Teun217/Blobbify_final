@@ -1,0 +1,658 @@
+html {
+    --sizeDiv: 10em;
+    --blobSpeed: 20s;
+    --sideMovementMultiplier: 9;
+    --sideMovementAmplitude: 50px;
+    --animationBezier: .8,0,.60,1;
+    
+    --animationSeedNumber:500000;
+    --animationSeed: calc(var(--animationSeedNumber) * -1 * 1s);
+
+    --bubblesFrameHeight: 85dvh;
+
+    --blobColor1: color(display-p3 1 0 0);
+    --blobColor2: color(display-p3 1 0.75 0);
+    --blobColor3: color(display-p3 1 0.375 0);
+
+    --blobColor4: color(display-p3 0 0 1);
+    --blobColor5: color(display-p3 1 0.3 0);
+
+    --hueShift: -100deg;
+
+    --inputSize: 4.1em;
+
+    --bloobyTimingFunction: cubic-bezier(.39,2,.46,.68);
+}
+
+/* html, html * {
+    --animationSeed: calc(var(--animationSeedNumber) * -1 * 1s);
+} */
+
+/* GENERAL STYLING */
+* {
+    margin: 0;
+    font-family: Helvetica;
+    font-weight: bold;
+}
+
+body{
+    overflow: hidden;
+}
+
+/* =============
+MARK: randomness
+============= */
+@property --random {
+  syntax: "<integer>";
+  inherits: true;
+  initial-value: 6;
+}
+
+
+
+html {
+    animation: random 0.001s linear infinite;
+    /* --random:10; */
+
+    counter-reset: seed;
+    counter-incremenant: seed var(--random);
+}
+
+
+html, html * {
+    --hi:abs(--random);
+}
+
+body:after {
+
+    content: counter(seed);
+    position: absolute;
+    color: #fff;
+    font-size: 3rem;
+    display: none;
+}
+
+html:has(li:nth-of-type(2) input:checked){
+
+        animation-play-state: paused;
+        --animationSeedNumber: round(var(--random), 1);
+        --animationSeed: -2s;
+        --animationSeed: calc(5 * -1 * 1s);
+        --animationSeed: calc(var(--animationSeedNumber) * -1 * 1s);
+
+        body:after{
+            display: block;
+        }
+
+}
+
+@keyframes random {
+    from {
+        --random: 500;
+    }
+    to {
+        --random: 10000;
+    }
+}
+
+
+/* =================
+MARK: BUBBLE STYLING
+================= */
+
+section div {
+    /* size and null-color*/
+    background-color: black;
+    width: var(--sizeDiv);
+    height: var(--sizeDiv);
+    border-radius: calc(var(--sizeDiv));
+    mix-blend-mode: multiply;
+    
+    margin: 0 calc(var(--sizeDiv) * 0.5 * -1);
+    &::after{
+        content: " ";
+        width: 100%;
+        height: 100%;
+        display: block;
+        border-radius: calc(var(--sizeDiv));
+        box-shadow: 
+        inset 0.25em 0.25em 0.05em #fff,
+        inset -0.25em -0.25em 0.1em #000;
+    }
+}
+
+
+/* ====================
+MARK: bubble base color
+==================== */
+
+section div:nth-child(3n)::after{
+    background-color: var(--blobColor1);
+}
+
+section div:nth-child(3n + 1)::after{
+    background-color: var(--blobColor2);
+}
+
+section div:nth-child(3n + 2)::after{
+    background-color: var(--blobColor3);
+}
+
+/* ==================
+MARK: bubble size dif
+================== */
+
+section {
+    div:nth-child(2n){
+    width: calc(var(--sizeDiv)*1.25);
+    height: calc(var(--sizeDiv)*1.25);
+    
+    }
+    
+    div:nth-child(3n){
+    width: calc(var(--sizeDiv)*0.75);
+    height: calc(var(--sizeDiv)*0.75);
+    }
+}
+
+/* ========================
+MARK: bubble responsiveness
+======================== */
+
+@media (max-width: 600px) {
+    section {
+        div{
+        width: calc(var(--sizeDiv)*0.8);
+        height: calc(var(--sizeDiv)*0.8);
+        }
+
+        div:nth-child(2n){
+        width: calc(var(--sizeDiv)*1);
+        height: calc(var(--sizeDiv)*1);  
+        }
+    
+        div:nth-child(3n){
+        width: calc(var(--sizeDiv)*0.60);
+        height: calc(var(--sizeDiv)*0.60);
+        }
+}
+}
+
+
+
+
+
+/* =================== 
+MARK: bubble animation
+=================== */
+
+section > div:first-child{
+    animation: --moveUpAndDown1 calc(var(--blobSpeed)*1.1) alternate cubic-bezier(var(--animationBezier)) infinite,
+                --moveUpAndDown2 calc(var(--blobSpeed)*0.73*var(--sideMovementMultiplier)) alternate ease-in-out infinite;
+    animation-delay: var(--animationSeed), var(--animationSeed);
+    scale: calc(1/var(--animationSeed));
+}
+
+section > div:nth-child(2){
+    animation: --moveUpAndDown1 calc(var(--blobSpeed)*1.2) alternate cubic-bezier(var(--animationBezier)) infinite,
+                --moveUpAndDown2 calc(var(--blobSpeed)*1.41*var(--sideMovementMultiplier)) alternate ease-in-out infinite;
+    animation-delay: var(--animationSeed), var(--animationSeed);
+}
+
+section > div:nth-child(3){
+    animation: --moveUpAndDown1 calc(var(--blobSpeed)*0.9) alternate cubic-bezier(var(--animationBezier)) infinite,
+                --moveUpAndDown2 calc(var(--blobSpeed)*0.58*var(--sideMovementMultiplier)) alternate ease-in-out infinite;
+    animation-delay: var(--animationSeed), var(--animationSeed);
+}
+
+section > div:nth-child(4){
+    animation: --moveUpAndDown1 calc(var(--blobSpeed)*1.3) alternate cubic-bezier(var(--animationBezier)) infinite,
+                --moveUpAndDown2 calc(var(--blobSpeed)*1.27*var(--sideMovementMultiplier)) alternate ease-in-out infinite;
+    animation-delay: var(--animationSeed), var(--animationSeed);
+}
+
+section > div:nth-child(5){
+    animation: --moveUpAndDown1 calc(var(--blobSpeed)*1.4) alternate cubic-bezier(var(--animationBezier)) infinite,
+                --moveUpAndDown2 calc(var(--blobSpeed)*0.64*var(--sideMovementMultiplier)) alternate ease-in-out infinite;
+    animation-delay: var(--animationSeed), var(--animationSeed);
+}
+
+section > div:nth-child(6){
+    animation: --moveUpAndDown1 calc(var(--blobSpeed)*0.8) alternate cubic-bezier(var(--animationBezier)) infinite,
+                --moveUpAndDown2 calc(var(--blobSpeed)*1.09*var(--sideMovementMultiplier)) alternate ease-in-out infinite;
+    animation-delay: var(--animationSeed), var(--animationSeed);
+}
+
+section > div:nth-child(7){
+    animation: --moveUpAndDown1 calc(var(--blobSpeed)*0.7) alternate cubic-bezier(var(--animationBezier)) infinite,
+                --moveUpAndDown2 calc(var(--blobSpeed)*0.81*var(--sideMovementMultiplier)) alternate ease-in-out infinite;
+    animation-delay: var(--animationSeed), var(--animationSeed);
+}
+
+section > div:nth-child(8){
+    animation: --moveUpAndDown1 calc(var(--blobSpeed)*0.5) alternate cubic-bezier(var(--animationBezier)) infinite,
+                --moveUpAndDown2 calc(var(--blobSpeed)*1.38*var(--sideMovementMultiplier)) alternate ease-in-out infinite;
+    animation-delay: var(--animationSeed), var(--animationSeed);
+}
+
+section > div:nth-child(9){
+    animation: --moveUpAndDown1 calc(var(--blobSpeed)*0.6) alternate cubic-bezier(var(--animationBezier)) infinite,
+                --moveUpAndDown2 calc(var(--blobSpeed)*0.52*var(--sideMovementMultiplier)) alternate ease-in-out infinite;
+    animation-delay: var(--animationSeed), var(--animationSeed);
+}
+
+section > div:nth-child(10){
+    animation: --moveUpAndDown1 calc(var(--blobSpeed)*1.15) alternate cubic-bezier(var(--animationBezier)) infinite,
+                --moveUpAndDown2 calc(var(--blobSpeed)*1.19*var(--sideMovementMultiplier)) alternate ease-in-out infinite;
+    animation-delay: var(--animationSeed), var(--animationSeed);
+}
+
+section > div:nth-child(11){
+    animation: --moveUpAndDown1 calc(var(--blobSpeed)*1.35) alternate cubic-bezier(var(--animationBezier)) infinite,
+                --moveUpAndDown2 calc(var(--blobSpeed)*0.97*var(--sideMovementMultiplier)) alternate ease-in-out infinite;
+    animation-delay: var(--animationSeed), var(--animationSeed);
+}
+
+section > div:nth-child(12){
+    animation: --moveUpAndDown1 calc(var(--blobSpeed)*0.85) alternate cubic-bezier(var(--animationBezier)) infinite,
+                --moveUpAndDown2 calc(var(--blobSpeed)*1.33*var(--sideMovementMultiplier)) alternate ease-in-out infinite;
+    animation-delay: var(--animationSeed), var(--animationSeed);
+}
+
+section > div:nth-child(13){
+    animation: --moveUpAndDown1 calc(var(--blobSpeed)*1.45) alternate cubic-bezier(var(--animationBezier)) infinite,
+                --moveUpAndDown2 calc(var(--blobSpeed)*0.69*var(--sideMovementMultiplier)) alternate ease-in-out infinite;
+    animation-delay: var(--animationSeed), var(--animationSeed);
+}
+
+section > div:nth-child(14){
+    animation: --moveUpAndDown1 calc(var(--blobSpeed)*1.25) alternate cubic-bezier(var(--animationBezier)) infinite,
+                --moveUpAndDown2 calc(var(--blobSpeed)*1.47*var(--sideMovementMultiplier)) alternate ease-in-out infinite;
+    animation-delay: var(--animationSeed)s, var(--animationSeed);
+}
+
+section > div:nth-child(15){
+    animation: --moveUpAndDown1 calc(var(--blobSpeed)*1.125) alternate cubic-bezier(var(--animationBezier)) infinite,
+                --moveUpAndDown2 calc(var(--blobSpeed)*0.88*var(--sideMovementMultiplier)) alternate ease-in-out infinite;
+    animation-delay: var(--animationSeed), var(--animationSeed);
+}
+
+section > div:nth-child(16){
+    animation: --moveUpAndDown1 calc(var(--blobSpeed)*0.65) alternate cubic-bezier(var(--animationBezier)) infinite,
+                --moveUpAndDown2 calc(var(--blobSpeed)*1.12*var(--sideMovementMultiplier)) alternate ease-in-out infinite;
+            }
+            
+html:has(li:nth-of-type(2) input:checked){
+    section > div{
+        animation-name: --moveUpAndDownRandomDelay1, --moveUpAndDownRandomDelay2;
+        animation-delay: calc(var(--hi) * 1s);
+
+        
+    }
+}   
+
+@keyframes --moveUpAndDown1 {
+    0%{
+        translate: 0 0;
+        filter: hue-rotate(var(--hueShift));
+    } 100%{
+        translate: 0 calc(var(--bubblesFrameHeight) - var(--sizeDiv));
+        filter: hue-rotate(0deg);
+    }
+}
+
+@keyframes --moveUpAndDown2 {
+    0% {
+        transform: translateX(0);
+    }
+    33% {
+        transform: translateX(calc(-1 * var(--sideMovementAmplitude)));
+    }
+    66% {
+        transform: translateX(calc(var(--sideMovementAmplitude)));
+    }
+    100% {
+        transform: translateX(0px);
+    }
+}
+
+@keyframes --moveUpAndDownRandomDelay1 {
+    0%{
+        translate: 0 0;
+        filter: hue-rotate(var(--hueShift));
+    } 100%{
+        translate: 0 calc(var(--bubblesFrameHeight) - var(--sizeDiv));
+        filter: hue-rotate(0deg);
+    }
+}
+
+@keyframes --moveUpAndDownRandomDelay2 {
+    0% {
+        transform: translateX(0);
+    }
+    33% {
+        transform: translateX(calc(-1 * var(--sideMovementAmplitude)));
+    }
+    66% {
+        transform: translateX(calc(var(--sideMovementAmplitude)));
+    }
+    100% {
+        transform: translateX(0px);
+    }
+}
+
+/* ==================== 
+MARK: CONTAINER STYLING
+==================== */
+
+body{
+    background-color: black;
+    height: 100dvh;
+    width: 100dvw;
+}
+
+main{
+    filter: url(#blobOnText);
+    height: var(--bubblesFrameHeight);
+    display: flex;
+    justify-content: center;
+    /* filter: url(#blobOnText); */
+    transform: translateZ(0);
+    /* bron chappie: prevent translate when undoing filter
+    If the filter blobOnText is removed the text moves even though the filter doesn't translate the text, how come?" */
+}
+
+
+section{
+    filter: url(#blobbify);
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+@media (min-width: 800px) {
+    section{
+        width: 25%;
+    }
+    body nav ul{
+        width: 20%;
+    }
+    h1{
+        font-size: 11dvw;
+    }
+}
+
+main > div{
+    height: 100%;
+}
+
+/* =============
+MARK: navstyling
+============= */
+
+nav {
+    height: calc(100dvh - var(--bubblesFrameHeight));
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+}
+
+nav ul{
+    height: 10em;
+    width: 100%;
+    height: 10em;
+    padding: 0;
+    z-index: 5;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-basis: 10000px;
+
+}
+
+nav li{
+    display: flex;
+    flex-direction: column;
+
+}
+
+nav p{
+    color: white;
+}
+
+/* =============
+MARK: H1 STYLING
+============= */
+
+h2{
+    position: absolute;
+    font-family: Helvetica, sans-serif;
+    font-weight: 900;
+    font-size: 7dvw;
+    width: fit-content;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+
+    z-index: 2;
+    transition: 0.2s;
+}
+
+@media (max-width: 800px){
+    h2{
+        font-size: 15dvw;
+    }
+}
+
+h2:nth-of-type(2){
+    display: none;
+}
+
+/* ===============
+MARK: NAV FUNCTION
+=============== */
+
+/* CMD */
+
+:root:has(li:first-child input:checked){
+        --blobColor1: rgb(253 240 87);
+        --blobColor2: rgb(253 240 87);
+        --blobColor3: rgb(253 240 87);
+        --blobColor4: rgb(253 240 87);
+        --blobColor5: rgb(253 240 87);
+
+        --hueShift: 0deg;
+        section div{
+            mix-blend-mode: normal;
+            border-radius: 0;
+            &::after{
+                    box-shadow: none;
+                    border-radius: 0;
+            }
+        }
+        main{
+            filter: none;
+        }
+        section{
+            filter: none;
+        }
+        h2{
+            font-weight: 400;
+            padding: 5px 15px;
+            z-index: 3;
+
+            &:nth-of-type(2){
+                display: block;
+                color: black;
+                background-color: white;
+                border: #000;
+                border-style: solid;
+                border-width: 0.5rem;
+            }
+            &:first-of-type{
+                display: none;
+            }
+            &:before{
+                display: block;
+                position: absolute;
+                content: "";
+                background-color: white;
+                width: 1.75rem;
+                aspect-ratio: 1/1;
+                top: -2rem;
+                left: -2rem;
+                border: #000;
+                border-style: solid;
+                border-width: 0.5rem;
+            }
+            &:after{
+                display: block;
+                position: absolute;
+                content: "";
+                background-color: white;
+                width: 1.75rem;
+                aspect-ratio: 1/1;
+                bottom: -2rem;
+                right: -2rem;
+                border: #000;
+                border-style: solid;
+                border-width: 0.5rem;
+            }
+        }
+        div{
+            animation-play-state: paused;
+            background-color: transparent;
+            position: relative;
+            &::after{
+                z-index: 1;
+            }
+        }
+        div:nth-child(8n - 4){
+            z-index: 2;
+            &::before{
+                content: "";
+                display: block;
+                background-image: url("img/miauw.svg");
+                background-size: contain;
+                width: 100%;
+                height: 100%;
+                z-index: 2;
+                position: absolute;
+                }
+            }
+    }
+    
+    
+:root:has(li:nth-of-type(3) input:checked){
+    h2 {
+        opacity: 0;
+        transition: 0.2s;
+    }
+}
+
+/* ============================
+MARK: selected input elements
+============================ */
+
+nav input {
+    width: var(--inputSize);
+    height: var(--inputSize);
+    border-radius: var(--inputSize);
+    appearance: none;
+    background-color: var(--blobColor4);
+    z-index: 2;
+}
+
+nav li {
+    /* padding: calc(var(--inputSize)*0.1); */
+    place-items: center;
+    position: relative;
+
+    height: calc(120%);
+    width: var(--inputSize);
+    filter: url(#blobSelect);
+    margin-bottom: -7em;
+}
+
+nav li::after{
+    content: " ";
+    width: calc(var(--inputSize)*1.25);
+    height: calc(var(--inputSize)*1.25);
+    background-color: var(--blobColor5);
+    border-radius: var(--inputSize);
+    position: absolute;
+    bottom: 0;
+    transition: 1s;
+
+}
+
+nav li::before{
+    content: " ";
+    width: calc(var(--inputSize)*1.25);
+    height: calc(var(--inputSize)*1.25);
+    background-color: var(--blobColor1);
+    border-radius: var(--inputSize);
+    position: absolute;
+    bottom: 0;
+    transition: 1s;
+
+}
+
+nav li:has(input:hover){
+    &::before{
+        bottom: calc(100% - var(--inputSize));
+        transition: 0.5s;
+    }
+    &::after{
+        bottom: calc(100% - var(--inputSize)*2.45);
+        transition: 0.5s;
+        transition-timing-function: var(--bloobyTimingFunction);
+    }
+}
+
+nav li:has(input:checked){
+    &::before{
+        bottom: calc(100% - var(--inputSize));
+        transition: 1s var(--bloobyTimingFunction);
+    }
+
+    &::after{
+        bottom: calc(100% - var(--inputSize));
+        transition: 1s var(--bloobyTimingFunction);
+    }
+}
+
+
+nav li:has(input[type=button]:hover){
+    &::before{
+        bottom: calc(100% - var(--inputSize));
+        transition: 1s;
+
+    }
+    &::after{
+        bottom: calc(100% - var(--inputSize));
+        transition: 1s;
+        transition-timing-function: var(--bloobyTimingFunction);
+    }
+}
+
+nav li:has(input:active){
+    &::before{
+        bottom: calc(100% - var(--inputSize));
+        scale: 0.5;
+        transition: 0.5s;
+    }
+    &::after{
+        bottom: calc(100% - var(--inputSize));
+        scale: 0.5;
+        transition: 0.5s;
+    }
+}
+
+
+

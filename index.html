@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <h2>BLOBBIFY</h2>
+        <h2>BORING!!</h2>
+
+            <section>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </section>
+    </main>
+
+    <nav>
+        <ul>
+            <li>
+                <!-- <p>Randvoorwaarde</p> -->
+                <input type="checkbox">
+            </li>
+            <li>
+                <!-- <p>tbd</p> -->
+                <input type="checkbox">
+            </li>
+            <li>
+                <!-- <p>No text</p> -->
+                <input type="checkbox">
+            </li>
+        </ul>
+    </nav>
+
+
+</body>
+
+<svg width="0" height="0" style="position:absolute">
+    <defs>
+        <filter id="blobbify">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="20"/>
+            <feColorMatrix
+                   type="matrix" 
+                   values="
+                           1  0  0  0  0
+                           0  1  0  0  0
+                           0  0  1  0  0
+                           0  0  0  200  -99"
+                   result="blob" 
+                   />
+        </filter>
+        
+        <filter id="blobSelect">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="20"/>
+            <feColorMatrix
+                   type="matrix" 
+                   values="
+                           1  0  0  0  0
+                           0  1  0  0  0
+                           0  0  1  0  0
+                           0  0  0  200  -99"
+                   result="blob" 
+                   />
+        </filter> 
+
+        <!-- <filter id="blobOnText" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="7"/>
+            <feColorMatrix 
+                    mode="matrix" 
+                    values="
+                            1  0  0  0  0
+                            0  1  0  0  0
+                            0  0  1  0  0
+                            0  0  0  200  -99"
+                    result="blob" 
+                    />
+
+            <feBlend in="SourceGraphic" in2="blob" />
+
+        </filter> -->
+    </defs>
+</svg>
+</html>
