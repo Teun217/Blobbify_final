@@ -10,19 +10,27 @@ Maar tegelijkertijd vind ik het niet héél erg bij Artifaction passen.
 Allereerst heb ik het super naar mijn zin gehad en merkte ik dat het onderwerp me echt interesseerde. Dat ik er verder en verder en verder aan wou werken — ik heb mezelf een aantal keer om 00:30 betrapt terwijl ik er nog steeds mee bezig was. Dit was voor mij super fijn om te merken; dit is echt een project geweest waar ik energie van kreeg.
 
 Ik heb het idee dat ik flink wat nieuwe dingen heb geleerd en dat ik vloeiender ben geworden in het schrijven van CSS. Dat is een van mijn leerdoelen en daar ben ik super blij mee.
+
 Het eindproduct vind ik goed gelukt, al is het een soort van half af omdat ik op het laatst problemen kreeg met het gebruiken van een "random" gegenereerde property. Ik heb de knop die die functie aanroept wel laten staan, omdat ik dat voor het eindgesprek van belang vind.
+
 Ik vond het leuk dat ik de motivatie voelde om dat probleem op te lossen, zodanig dat ik op advies van Sanne, Miriam Suzanne heb gemaild.
 
 ## Wat ging minder?
 Ik merk dat troubleshooten op mezelf matig gaat. Snel heb ik het gevoel dat ik het "gewoon niet weet".
-Dan ben ik snel geneigd om het aan AI te vragen omdat die een snel antwoord geeft. Wel lukte het goed om kritisch te kijken naar wat AI schreef en dat te implementeren in plaats van te kopiëren. Vaak was het toch wel zo dat AI compleet willekeurige dingen schreef waar ik uiteindelijk niets aan bleek te hebben. Aan het einde van het project liep ik tegen een probleem aan met het gebruiken van een random value, waarbij ik samen met Nils alle mogelijke problemen heb doorlopen. Het was voor mij super fijn om te zien hoe Nils dat troubleshooten aanpakte.
+Dan ben ik snel geneigd om het aan AI te vragen omdat die een snel antwoord geeft. Wel lukte het goed om kritisch te kijken naar wat AI schreef en dat te implementeren in plaats van te kopiëren. Vaak was het toch wel zo dat AI compleet willekeurige dingen schreef waar ik uiteindelijk niets aan bleek te hebben.
+ 
+Aan het einde van het project liep ik tegen een probleem aan met het gebruiken van een random value, waarbij ik samen met Nils alle mogelijke problemen heb doorlopen. Het was voor mij super fijn om te zien hoe Nils dat troubleshooten aanpakte.
 
 De tussentijdse reflecties ben ik vaak compleet vergeten en heb ik dus ook grotendeels niet gedaan. Dit komt voornamelijk doordat ik zodra ik in de les kwam enthousiast aan de slag ging met het verbeteren van het project, maar daarin compleet vergat op te schrijven wat ik deed.
+
 Ook heb ik vaak dat ik heel lang aan hele kleine dingetjes zit te sleutelen, terwijl ik eigenlijk beter kan werken aan de volledige basis op niveau krijgen.
 
 ## Wat heb ik geleerd?
 Ik heb een heel nieuw concept geleerd: svg filters.
 Daarbij heb ik geëxperimenteerd met blend modes.
+![svgfilters: gaussian blur, Color matrix](image-1.png)
+
+
 Ook heb ik geleerd over het genereren van een "random" value met alleen CSS, en hoe je dit niet kan gebruiken om een animatie mee aan te sturen. 🙁
 
 Ik heb geleerd over verschillende CSS states die het mogelijk maken checkboxes om te bouwen naar iets interessanters.
