@@ -5,8 +5,7 @@ html {
     --sideMovementAmplitude: 50px;
     --animationBezier: .8,0,.60,1;
     
-    --animationSeedNumber:500000000;
-    --animationSeed: calc(var(--animationSeedNumber) * -1 * 1s);
+    --animationSeed:-5000s;
 
     --bubblesFrameHeight: 85dvh;
 
@@ -69,7 +68,7 @@ body:after {
     position: absolute;
     color: #fff;
     font-size: 3rem;
-    display: none;
+    /* display: none; */
 }
 
 html:has(li:nth-of-type(2) input:checked){
@@ -88,10 +87,10 @@ html:has(li:nth-of-type(2) input:checked){
 
 @keyframes random {
     from {
-        --random: 500;
+        --random: 85;
     }
     to {
-        --random: 10000;
+        --random: 100;
     }
 }
 
@@ -280,7 +279,8 @@ section > div:nth-child(15){
 section > div:nth-child(16){
     animation: --moveUpAndDown1 calc(var(--blobSpeed)*0.65) alternate cubic-bezier(var(--animationBezier)) infinite,
                 --moveUpAndDown2 calc(var(--blobSpeed)*1.12*var(--sideMovementMultiplier)) alternate ease-in-out infinite;
-            }
+    animation-delay: var(--animationSeed), var(--animationSeed);
+}
             
 html:has(li:nth-of-type(2) input:checked){
     section > div{
