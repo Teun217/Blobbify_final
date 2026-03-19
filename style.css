@@ -5,7 +5,7 @@ html {
     --sideMovementAmplitude: 50px;
     --animationBezier: .8,0,.60,1;
     
-    --animationSeedNumber:500000;
+    --animationSeedNumber:500000000;
     --animationSeed: calc(var(--animationSeedNumber) * -1 * 1s);
 
     --bubblesFrameHeight: 85dvh;
@@ -425,7 +425,7 @@ nav p{
 }
 
 /* =============
-MARK: H1 STYLING
+MARK: HEADER STYLING
 ============= */
 
 h2{
@@ -439,7 +439,7 @@ h2{
     transform: translate(-50%, -50%);
     margin: 0;
 
-    z-index: 2;
+    z-index: 10;
     transition: 0.2s;
 }
 
@@ -528,25 +528,38 @@ MARK: NAV FUNCTION
             animation-play-state: paused;
             background-color: transparent;
             position: relative;
+            z-index: 1;
             &::after{
                 z-index: 1;
             }
-        }
-        div:nth-child(8n - 4){
-            z-index: 2;
             &::before{
                 content: "";
                 display: block;
-                background-image: url("img/miauw.svg");
                 background-size: contain;
                 width: 100%;
                 height: 100%;
-                z-index: 2;
                 position: absolute;
+            }
+            &:nth-child(4){
+                z-index: 2;
+                &:before{
+                    background-image: url("img/miauw.svg");
                 }
             }
+            &:nth-child(8){
+                z-index: 2;
+                &:before{
+                    background-image: url("img/guitar.svg");
+                }
+            }
+            &:nth-child(12){
+                z-index: 2;
+                &:before{
+                    background-image: url("img/unicorn.svg");
+                }
+            }
+        }
     }
-    
     
 :root:has(li:nth-of-type(3) input:checked){
     h2 {
